@@ -1405,7 +1405,7 @@
     function createProduct(productData) {
         const newProduct = {
             ...productData,
-            id: Date.now(),
+            id: window.generateId('product'),
             createdAt: new Date().toISOString()
         };
         

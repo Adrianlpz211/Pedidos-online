@@ -1005,8 +1005,8 @@
         const total = subtotal; // Por ahora sin impuestos ni descuentos
         
         const nuevoPedido = {
-            id: Date.now(),
-            numero: `PED-${String(pedidos.length + 1).padStart(3, '0')}`,
+            id: window.generateId('order'),
+            numero: window.generatePrefixedId('PED', 'order'),
             cliente: {
                 nombre: clienteNombre,
                 telefono: clienteTelefono,

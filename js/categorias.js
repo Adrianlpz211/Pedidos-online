@@ -53,6 +53,7 @@
         if (savedCategorias) {
             try {
                 categorias = JSON.parse(savedCategorias);
+                console.log('Categorías cargadas desde localStorage:', categorias);
             } catch (error) {
                 console.error('Error al cargar categorías:', error);
                 categorias = [];
@@ -60,8 +61,13 @@
         } else {
             // Datos de ejemplo
             categorias = getSampleCategorias();
+            console.log('Categorías de ejemplo creadas:', categorias);
             saveCategorias();
         }
+        
+        // CORRECCIÓN: Validar que las categorías tengan la estructura correcta
+        categorias = categorias.filter(cat => cat && cat.id && cat.name);
+        console.log('Categorías validadas:', categorias);
         
         renderCategorias();
     }
@@ -73,6 +79,7 @@
         if (savedSubcategorias) {
             try {
                 subcategorias = JSON.parse(savedSubcategorias);
+                console.log('Subcategorías cargadas desde localStorage:', subcategorias);
             } catch (error) {
                 console.error('Error al cargar subcategorías:', error);
                 subcategorias = [];
@@ -80,8 +87,13 @@
         } else {
             // Datos de ejemplo
             subcategorias = getSampleSubcategorias();
+            console.log('Subcategorías de ejemplo creadas:', subcategorias);
             saveSubcategorias();
         }
+        
+        // CORRECCIÓN: Validar que las subcategorías tengan la estructura correcta
+        subcategorias = subcategorias.filter(sub => sub && sub.id && sub.name);
+        console.log('Subcategorías validadas:', subcategorias);
         
         renderSubcategorias();
     }
@@ -246,14 +258,20 @@
     }
     
     function createCategoriaCard(categoria) {
+        // CORRECCIÓN: Validar que la categoría tenga los datos necesarios
+        if (!categoria || !categoria.id) {
+            console.error('Categoría inválida:', categoria);
+            return '';
+        }
+        
         const subcategoriasRelacionadas = subcategorias.filter(sub => 
-            sub.categoriaIds.includes(categoria.id)
+            sub.categoriaIds && sub.categoriaIds.includes(categoria.id)
         );
         
         return `
             <div class="categoria-item" data-categoria-id="${categoria.id}">
                 <div class="categoria-header">
-                    <h4 class="categoria-name">${categoria.name}</h4>
+                    <h4 class="categoria-name">${categoria.name || 'Sin nombre'}</h4>
                     <div class="categoria-actions">
                         <button class="btn btn-primary btn-sm" onclick="editCategoria(${categoria.id})">
                             <i class="fas fa-edit"></i>
@@ -742,7 +760,7 @@
     function createCategoria(categoriaData, selectedSubcategoriaIds = []) {
         const newCategoria = {
             ...categoriaData,
-            id: Date.now(),
+            id: window.generateId('category'),
             productCount: 0,
             createdAt: new Date().toISOString()
         };
@@ -862,7 +880,7 @@
     function createSubcategoria(subcategoriaData) {
         const newSubcategoria = {
             ...subcategoriaData,
-            id: Date.now(),
+            id: window.generateId('subcategory'),
             createdAt: new Date().toISOString()
         };
         

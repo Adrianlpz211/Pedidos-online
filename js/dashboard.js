@@ -36,40 +36,68 @@
     // INICIALIZACIÓN
     // ===================================
     function init() {
-        setupEventListeners();
-        initTheme();
+        console.log('🚀 Iniciando dashboard...');
         
-        // Cargar módulo guardado o usar productos por defecto
-        const savedModule = localStorage.getItem('dashboardCurrentModule');
-        if (savedModule) {
-            currentModule = savedModule;
-            console.log('Módulo guardado encontrado:', savedModule);
+        try {
+            setupEventListeners();
+            initTheme();
+            
+            // Cargar módulo guardado o usar productos por defecto
+            const savedModule = localStorage.getItem('dashboardCurrentModule');
+            if (savedModule) {
+                currentModule = savedModule;
+                console.log('Módulo guardado encontrado:', savedModule);
+            }
+            
+            loadModule(currentModule);
+            loadDashboardData();
+            
+            // CORRECCIÓN: Inicializar notificaciones con múltiples intentos
+            console.log('🔔 Inicializando notificaciones en init()...');
+            initNotificationsWithRetry();
+            
+            // Mostrar módulo inicial
+            switchModule(currentModule);
+            
+            // CORRECCIÓN: Inicializar módulos específicos con verificación
+            console.log('📦 Inicializando módulos específicos...');
+            initializeModules();
+            
+            console.log('✅ Dashboard inicializado correctamente con módulo:', currentModule);
+        } catch (error) {
+            console.error('❌ Error al inicializar dashboard:', error);
+            // Intentar recuperación básica
+            setTimeout(() => {
+                console.log('🔄 Intentando recuperación...');
+                init();
+            }, 1000);
         }
+    }
+    
+    // CORRECCIÓN: Función para inicializar módulos de manera segura
+    function initializeModules() {
+        const modules = [
+            { name: 'Productos', fn: window.loadProductosModule },
+            { name: 'Categorías', fn: window.loadCategoriasModule },
+            { name: 'Métricas', fn: window.loadMetricasModule },
+            { name: 'Configuración', fn: window.loadConfiguracionModule },
+            { name: 'Clientes', fn: window.loadClientesModule },
+            { name: 'Usuarios', fn: window.loadUsuariosModule },
+            { name: 'Pedidos', fn: window.loadPedidosModule }
+        ];
         
-        loadModule(currentModule);
-        loadDashboardData();
-        
-        // Inicializar notificaciones con delay para asegurar que el DOM esté listo
-        console.log('🔔 Inicializando notificaciones en init()...');
-        setTimeout(() => {
-            initNotifications();
-        }, 100);
-        
-        // Mostrar módulo inicial
-        switchModule(currentModule);
-        
-        // Inicializar módulos específicos
-        if (window.loadProductosModule) {
-            window.loadProductosModule();
-        }
-        if (window.loadCategoriasModule) {
-            window.loadCategoriasModule();
-        }
-        if (window.loadMetricasModule) {
-            window.loadMetricasModule();
-        }
-        
-        console.log('Dashboard inicializado con módulo:', currentModule);
+        modules.forEach(module => {
+            try {
+                if (module.fn && typeof module.fn === 'function') {
+                    module.fn();
+                    console.log(`✅ Módulo ${module.name} inicializado`);
+                } else {
+                    console.log(`⚠️ Módulo ${module.name} no disponible`);
+                }
+            } catch (error) {
+                console.error(`❌ Error al inicializar módulo ${module.name}:`, error);
+            }
+        });
     }
     
     // ===================================
@@ -574,14 +602,103 @@
         });
     }
     
+    // CORRECCIÓN: Función para crear el botón de notificaciones si no existe
+    function createNotificationsButton() {
+        console.log('🔧 Creando botón de notificaciones...');
+        
+        // Buscar el header donde debe ir el botón
+        const header = document.querySelector('.dashboard-header');
+        if (!header) {
+            console.error('❌ No se encontró el header del dashboard');
+            return;
+        }
+        
+        // Crear el botón de notificaciones
+        const notificationsBtn = document.createElement('button');
+        notificationsBtn.id = 'notificationsBtn';
+        notificationsBtn.className = 'notifications-btn';
+        notificationsBtn.innerHTML = `
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">0</span>
+        `;
+        
+        // Crear el dropdown de notificaciones
+        const notificationsDropdown = document.createElement('div');
+        notificationsDropdown.id = 'notificationsDropdown';
+        notificationsDropdown.className = 'notifications-dropdown';
+        notificationsDropdown.innerHTML = `
+            <div class="notifications-header">
+                <h4>Notificaciones</h4>
+                <button class="btn-clear-all" onclick="clearAllNotifications()">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+                <div class="notification-item">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="notification-content">
+                        <p>Sistema de notificaciones activo</p>
+                        <span class="notification-time">Ahora</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Agregar al header
+        header.appendChild(notificationsBtn);
+        header.appendChild(notificationsDropdown);
+        
+        console.log('✅ Botón de notificaciones creado');
+    }
+    
+    // CORRECCIÓN: Función para inicializar notificaciones con reintentos
+    function initNotificationsWithRetry() {
+        let attempts = 0;
+        const maxAttempts = 5;
+        const retryDelay = 200;
+        
+        function tryInit() {
+            attempts++;
+            console.log(`🔔 Intento ${attempts}/${maxAttempts} de inicializar notificaciones...`);
+            
+            initNotifications();
+            
+            // Verificar si se inicializó correctamente
+            const notificationsBtn = document.getElementById('notificationsBtn');
+            if (notificationsBtn) {
+                console.log('✅ Notificaciones inicializadas correctamente');
+                return;
+            }
+            
+            // Si no se pudo inicializar y no hemos alcanzado el máximo de intentos
+            if (attempts < maxAttempts) {
+                console.log(`⏳ Reintentando en ${retryDelay}ms...`);
+                setTimeout(tryInit, retryDelay);
+            } else {
+                console.error('❌ No se pudo inicializar el sistema de notificaciones después de', maxAttempts, 'intentos');
+            }
+        }
+        
+        tryInit();
+    }
+    
     function initNotifications() {
         console.log('🔔 Iniciando initNotifications()...');
+        
+        // CORRECCIÓN: Intentar múltiples veces si no se encuentra el botón
         let notificationsBtn = document.getElementById('notificationsBtn');
         const notificationsDropdown = document.getElementById('notificationsDropdown');
         
         console.log('🔍 Elementos encontrados:');
         console.log('- notificationsBtn:', !!notificationsBtn);
         console.log('- notificationsDropdown:', !!notificationsDropdown);
+        
+        // Si no se encuentra el botón, intentar crearlo
+        if (!notificationsBtn) {
+            console.log('🔧 Botón de notificaciones no encontrado, creando...');
+            createNotificationsButton();
+            notificationsBtn = document.getElementById('notificationsBtn');
+        }
         
         // Si el botón ya existe, solo configurar event listeners
         if (notificationsBtn) {

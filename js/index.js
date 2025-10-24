@@ -372,7 +372,7 @@ function confirmOrder() {
     
     // Crear pedido en formato para el módulo de pedidos
     const order = {
-        id: Date.now().toString(),
+        id: window.generateId('order').toString(),
         date: new Date().toISOString(),
         items: [...cartItems],
         subtotal: calculateSubtotal(),
@@ -462,6 +462,8 @@ function loadDynamicProducts() {
     initializeLikes();
     initializeQuickView();
     updateProductCreditoBadges();
+    
+    // Lazy loading deshabilitado - sistema original funcionando
     
     console.log('✅ Productos dinámicos cargados correctamente');
 }
