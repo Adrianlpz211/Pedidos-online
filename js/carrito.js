@@ -173,11 +173,12 @@ console.log('🛒 CARRITO.JS CARGADO - VERSIÓN 20241220');
     
     // Actualizar vista del carrito
     function actualizarVistaCarrito() {
-        const cartItemsContainer = document.getElementById('cartItems');
-        const cartEmpty = document.getElementById('cartEmpty');
+        // Usar DOM Cache para elementos frecuentemente accedidos
+        const cartItemsContainer = window.DOMCache ? window.DOMCache.get('cartItems') : document.getElementById('cartItems');
+        const cartEmpty = window.DOMCache ? window.DOMCache.get('cartEmpty') : document.getElementById('cartEmpty');
         const cartFooter = document.querySelector('.cart-footer');
-        const cartSubtotal = document.getElementById('cartSubtotal');
-        const cartTotal = document.getElementById('cartTotal');
+        const cartSubtotal = window.DOMCache ? window.DOMCache.get('cartSubtotal') : document.getElementById('cartSubtotal');
+        const cartTotal = window.DOMCache ? window.DOMCache.get('cartTotal') : document.getElementById('cartTotal');
         
         if (carritoData.length === 0) {
             cartItemsContainer.style.display = 'none';
@@ -188,8 +189,8 @@ console.log('🛒 CARRITO.JS CARGADO - VERSIÓN 20241220');
             cartEmpty.style.display = 'none';
             cartFooter.style.display = 'block';
             
-            // Renderizar items
-            cartItemsContainer.innerHTML = '';
+            // B3.1 - DocumentFragment para optimización
+            const fragment = document.createDocumentFragment();
             let subtotal = 0;
             
             carritoData.forEach((item, index) => {
@@ -229,8 +230,15 @@ console.log('🛒 CARRITO.JS CARGADO - VERSIÓN 20241220');
                     </div>
                 `;
                 
-                cartItemsContainer.innerHTML += itemHTML;
+                // Crear elemento temporal para agregar al fragment
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = itemHTML;
+                fragment.appendChild(tempDiv.firstElementChild);
             });
+            
+            // Limpiar contenedor y agregar todos los items de una vez
+            cartItemsContainer.innerHTML = '';
+            cartItemsContainer.appendChild(fragment);
             
             // Actualizar totales
             cartSubtotal.textContent = `USD ${subtotal.toFixed(2)}`;

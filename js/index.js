@@ -431,8 +431,8 @@ function loadDynamicProducts() {
     
     console.log('📦 Productos encontrados en localStorage:', productos.length);
     
-    // Obtener el contenedor de productos
-    const productosGrid = document.getElementById('productsGrid');
+    // Obtener el contenedor de productos usando DOM Cache
+    const productosGrid = window.DOMCache ? window.DOMCache.get('productsGrid') : document.getElementById('productsGrid');
     if (!productosGrid) {
         console.error('❌ No se encontró el contenedor de productos');
         return;
@@ -451,11 +451,17 @@ function loadDynamicProducts() {
     // Limpiar productos existentes
     productosGrid.innerHTML = '';
     
-    // Renderizar cada producto
+    // B3.1 - DocumentFragment para optimización
+    const fragment = document.createDocumentFragment();
+    
+    // Renderizar cada producto en el fragment
     productos.forEach(producto => {
         const productCard = createProductCard(producto);
-        productosGrid.appendChild(productCard);
+        fragment.appendChild(productCard);
     });
+    
+    // Agregar todos los productos de una vez (una sola actualización del DOM)
+    productosGrid.appendChild(fragment);
     
     // Reconfigurar event listeners
     initializeProductActions();
@@ -463,9 +469,7 @@ function loadDynamicProducts() {
     initializeQuickView();
     updateProductCreditoBadges();
     
-    // Lazy loading deshabilitado - sistema original funcionando
-    
-    console.log('✅ Productos dinámicos cargados correctamente');
+    console.log('✅ Productos dinámicos cargados correctamente con DocumentFragment');
 }
 
 function createProductCard(producto) {
@@ -701,8 +705,8 @@ function updateCartUI() {
     console.log('🔄 ACTUALIZANDO UI DEL CARRITO');
     console.log('📊 Productos en carrito:', cartItems.length);
     
-    // Actualizar contador del carrito
-    const cartBadge = document.getElementById('cartBadge');
+    // Actualizar contador del carrito usando DOM Cache
+    const cartBadge = window.DOMCache ? window.DOMCache.get('cartBadge') : document.getElementById('cartBadge');
     if (cartBadge) {
         cartBadge.textContent = cartItems.length;
         cartBadge.style.display = cartItems.length > 0 ? 'block' : 'none';
@@ -711,8 +715,8 @@ function updateCartUI() {
         console.log('❌ No se encontró #cartBadge');
     }
     
-    // Actualizar botón de checkout
-    const btnCheckout = document.getElementById('btnCheckout');
+    // Actualizar botón de checkout usando DOM Cache
+    const btnCheckout = window.DOMCache ? window.DOMCache.get('btnCheckout') : document.getElementById('btnCheckout');
     if (btnCheckout) {
         if (cartItems.length > 0) {
             btnCheckout.style.display = 'block';

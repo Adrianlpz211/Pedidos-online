@@ -2063,3 +2063,36 @@ input:checked + .slider:before {
         padding: 15px;
     }
 }
+
+/* ===================================
+   BADGES DE CRÉDITO
+   =================================== */
+.mobile-credito-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+    z-index: 2;
+}
+
+.table-credito-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    box-shadow: 0 1px 3px rgba(40, 167, 69, 0.3);
+}

@@ -57,7 +57,36 @@
             }
         });
         
+        // Listener para detectar cambios en categorías y subcategorías
+        setupStorageListeners();
+        
         console.log('Módulo Productos inicializado');
+    }
+    
+    // Función para configurar listeners de localStorage
+    function setupStorageListeners() {
+        // Listener para cambios en categorías
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'dashboardCategorias') {
+                console.log('🔄 Categorías actualizadas, recargando...');
+                loadCategoriesAndSubcategories();
+            } else if (e.key === 'dashboardSubcategorias') {
+                console.log('🔄 Subcategorías actualizadas, recargando...');
+                loadCategoriesAndSubcategories();
+            }
+        });
+        
+        // También escuchar cambios dentro de la misma ventana
+        const originalSetItem = localStorage.setItem;
+        localStorage.setItem = function(key, value) {
+            originalSetItem.apply(this, arguments);
+            if (key === 'dashboardCategorias' || key === 'dashboardSubcategorias') {
+                console.log('🔄 Cambio detectado en localStorage:', key);
+                setTimeout(() => {
+                    loadCategoriesAndSubcategories();
+                }, 100);
+            }
+        };
     }
     
     // ===================================
@@ -131,7 +160,7 @@
         console.log('Cargando categorías y subcategorías...');
         
         // Cargar categorías desde localStorage o usar datos por defecto
-        const savedCategories = localStorage.getItem('dashboardCategories');
+        const savedCategories = localStorage.getItem('dashboardCategorias');
         if (savedCategories) {
             try {
                 availableCategories = JSON.parse(savedCategories);
@@ -144,7 +173,7 @@
         }
         
         // Cargar subcategorías desde localStorage o usar datos por defecto
-        const savedSubcategories = localStorage.getItem('dashboardSubcategories');
+        const savedSubcategories = localStorage.getItem('dashboardSubcategorias');
         if (savedSubcategories) {
             try {
                 availableSubcategories = JSON.parse(savedSubcategories);
@@ -158,6 +187,35 @@
         
         console.log('Categorías cargadas:', availableCategories.length);
         console.log('Subcategorías cargadas:', availableSubcategories.length);
+        
+        // Actualizar chips si hay un modal abierto
+        updateChipSelectorsIfOpen();
+    }
+    
+    // Función para actualizar selectores de chips si están abiertos
+    function updateChipSelectorsIfOpen() {
+        const categorySelector = document.querySelector('.chip-selector-modal[data-type="category"]');
+        const subcategorySelector = document.querySelector('.chip-selector-modal[data-type="subcategory"]');
+        
+        if (categorySelector) {
+            updateChipSelectorUI('category');
+        }
+        if (subcategorySelector) {
+            updateChipSelectorUI('subcategory');
+        }
+    }
+    
+    // Función para obtener subcategorías filtradas por categorías seleccionadas
+    function getFilteredSubcategories() {
+        if (selectedCategories.length === 0) {
+            return availableSubcategories;
+        }
+        
+        const selectedCategoryIds = selectedCategories.map(cat => cat.id);
+        return availableSubcategories.filter(subcat => {
+            // Verificar si la subcategoría está vinculada a alguna categoría seleccionada
+            return subcat.categoriaIds && subcat.categoriaIds.some(catId => selectedCategoryIds.includes(catId));
+        });
     }
     
     function getDefaultCategories() {
@@ -198,7 +256,6 @@
         
         const chipsHTML = selectedItems.map(item => `
             <div class="chip" data-id="${item.id}" data-type="${type}">
-                <i class="${item.icon || 'fas fa-tag'}"></i>
                 <span>${item.name}</span>
                 <button class="chip-remove" onclick="removeChip('${type}', ${item.id})">
                     <i class="fas fa-times"></i>
@@ -233,7 +290,7 @@
     
     function openChipSelector(type) {
         const isCategory = type === 'category';
-        const availableItems = isCategory ? availableCategories : availableSubcategories;
+        const availableItems = isCategory ? availableCategories : getFilteredSubcategories();
         const selectedItems = isCategory ? selectedCategories : selectedSubcategories;
         
         const modalHTML = `
@@ -319,9 +376,6 @@
                     <div class="chip-selector-checkbox">
                         <i class="fas fa-check"></i>
                     </div>
-                    <div class="chip-selector-icon" style="color: ${item.color}">
-                        <i class="${item.icon || 'fas fa-tag'}"></i>
-                    </div>
                     <div class="chip-selector-text">
                         <div class="chip-selector-name">${item.name}</div>
                         ${type === 'subcategory' ? `<div class="chip-selector-category">${getCategoryName(item.categoryId)}</div>` : ''}
@@ -338,7 +392,7 @@
     
     function toggleChipSelection(type, itemId) {
         const isCategory = type === 'category';
-        const availableItems = isCategory ? availableCategories : availableSubcategories;
+        const availableItems = isCategory ? availableCategories : getFilteredSubcategories();
         const selectedItems = isCategory ? selectedCategories : selectedSubcategories;
         
         const item = availableItems.find(i => i.id === itemId);
@@ -354,13 +408,31 @@
             selectedItems.push(item);
         }
         
+        // Si se cambió una categoría, limpiar subcategorías no válidas
+        if (isCategory) {
+            cleanInvalidSubcategories();
+        }
+        
         // Actualizar UI
         updateChipSelectorUI(type);
     }
     
+    // Función para limpiar subcategorías que ya no son válidas
+    function cleanInvalidSubcategories() {
+        const validSubcategories = getFilteredSubcategories();
+        const validSubcategoryIds = validSubcategories.map(sub => sub.id);
+        
+        // Remover subcategorías que ya no están disponibles
+        selectedSubcategories = selectedSubcategories.filter(sub => 
+            validSubcategoryIds.includes(sub.id)
+        );
+        
+        console.log('🧹 Subcategorías limpiadas:', selectedSubcategories.length);
+    }
+    
     function updateChipSelectorUI(type) {
         const isCategory = type === 'category';
-        const availableItems = isCategory ? availableCategories : availableSubcategories;
+        const availableItems = isCategory ? availableCategories : getFilteredSubcategories();
         const selectedItems = isCategory ? selectedCategories : selectedSubcategories;
         
         const content = document.getElementById('chipSelectorContent');
@@ -692,13 +764,23 @@
         const endIndex = startIndex + itemsPerPage;
         const pageProducts = filteredProducts.slice(startIndex, endIndex);
         
-        const cardsHTML = `
-            <div class="mobile-products-grid">
-                ${pageProducts.map(product => createMobileCard(product)).join('')}
-            </div>
-        `;
+        // B3.1 - DocumentFragment para optimización
+        const fragment = document.createDocumentFragment();
+        const container = document.createElement('div');
+        container.className = 'mobile-products-grid';
         
-        productsGrid.innerHTML = cardsHTML;
+        pageProducts.forEach(product => {
+            const cardHTML = createMobileCard(product);
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = cardHTML;
+            container.appendChild(tempDiv.firstElementChild);
+        });
+        
+        fragment.appendChild(container);
+        
+        // Limpiar y agregar todos los productos de una vez
+        productsGrid.innerHTML = '';
+        productsGrid.appendChild(fragment);
         productsGrid.className = 'products-grid mobile-cards-view';
     }
     
@@ -796,6 +878,7 @@
                 <td>
                     <div class="product-name">${product.name}</div>
                     <div class="product-category-small">${product.category} - ${product.subcategory}</div>
+                    ${product.credito ? `<span class="table-credito-badge">Crédito</span>` : ''}
                 </td>
                 <td>${product.category}</td>
                 <td>
@@ -839,6 +922,7 @@
                            ${isSelected ? 'checked' : ''} 
                            onchange="toggleProductSelection(${product.id}, this)">
                     ${discount > 0 ? `<span class="mobile-discount-badge">-${discount}%</span>` : ''}
+                    ${product.credito ? `<span class="mobile-credito-badge">Crédito</span>` : ''}
                     <img src="${product.image}" alt="${product.name}" class="mobile-product-image" 
                          onerror="this.src='img/placeholder.svg'">
                     <div class="mobile-product-status ${statusClass} ${featuredClass}">

@@ -301,9 +301,22 @@
         }
         
         console.log('✅ Renderizando', filteredPedidos.length, 'pedidos');
-        // Mostrar tarjetas responsivas para PC y móvil
-        pedidosGrid.innerHTML = filteredPedidos.map(pedido => createPedidoCard(pedido)).join('');
-        console.log('✅ Pedidos renderizados correctamente');
+        
+        // B3.1 - DocumentFragment para optimización
+        const fragment = document.createDocumentFragment();
+        
+        filteredPedidos.forEach(pedido => {
+            const cardHTML = createPedidoCard(pedido);
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = cardHTML;
+            fragment.appendChild(tempDiv.firstElementChild);
+        });
+        
+        // Limpiar y agregar todos los pedidos de una vez
+        pedidosGrid.innerHTML = '';
+        pedidosGrid.appendChild(fragment);
+        
+        console.log('✅ Pedidos renderizados correctamente con DocumentFragment');
     }
     
     
