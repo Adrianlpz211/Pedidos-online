@@ -1472,10 +1472,23 @@ function showNotification(message, type = 'info') {
 }
 
 // ===================================
-// LISTENER PARA MENSAJES DEL DASHBOARD (OPTIMIZADO)
+// LISTENER PARA MENSAJES DEL DASHBOARD (MEJORADO A2)
 // ===================================
 if (!window.dashboardMessageListenerAdded) {
     window.addEventListener('message', function(event) {
+        // MEJORA A2: Validar origen para seguridad
+        const allowedOrigins = [
+            'http://localhost',
+            'http://127.0.0.1',
+            'file://',
+            window.location.origin
+        ];
+        
+        if (!allowedOrigins.some(origin => event.origin.startsWith(origin))) {
+            console.log('Mensaje de origen no autorizado ignorado:', event.origin);
+            return;
+        }
+        
         console.log('Mensaje recibido del dashboard:', event.data);
         
         if (event.data.type === 'toggleCartButtons') {

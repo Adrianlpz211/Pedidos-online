@@ -746,17 +746,41 @@
         
         // Solo ejecutar si estamos en el dashboard
         if (window.location.pathname.includes('dashboard.html')) {
-            // Enviar mensaje al index.html si está abierto (comunicación directa)
-            if (window.opener && !window.opener.closed) {
-                try {
-                    window.opener.postMessage({
-                        type: 'toggleVisibility',
-                        icon: icon,
-                        mostrar: mostrar,
-                        timestamp: Date.now()
-                    }, '*');
-                } catch (error) {
-                    console.log('No se pudo enviar mensaje al index:', error);
+            // MEJORA A2: Usar sistema de comunicación unificado
+            if (window.sendToDashboard) {
+                window.sendToDashboard('toggleVisibility', {
+                    icon: icon,
+                    mostrar: mostrar,
+                    timestamp: Date.now()
+                }).catch(error => {
+                    console.log('Error en comunicación unificada, usando fallback:', error);
+                    // Fallback al método original
+                    if (window.opener && !window.opener.closed) {
+                        try {
+                            window.opener.postMessage({
+                                type: 'toggleVisibility',
+                                icon: icon,
+                                mostrar: mostrar,
+                                timestamp: Date.now()
+                            }, '*');
+                        } catch (error) {
+                            console.log('No se pudo enviar mensaje al index:', error);
+                        }
+                    }
+                });
+            } else {
+                // Fallback al método original si no está disponible el sistema unificado
+                if (window.opener && !window.opener.closed) {
+                    try {
+                        window.opener.postMessage({
+                            type: 'toggleVisibility',
+                            icon: icon,
+                            mostrar: mostrar,
+                            timestamp: Date.now()
+                        }, '*');
+                    } catch (error) {
+                        console.log('No se pudo enviar mensaje al index:', error);
+                    }
                 }
             }
         }
@@ -765,21 +789,47 @@
         if (icon === 'cart') {
             console.log('Enviando mensaje de botones de carrito:', mostrar);
             
-            // Intentar comunicación directa primero
-            if (window.opener && !window.opener.closed) {
-                try {
-                    const message = {
-                        type: 'toggleCartButtons',
-                        mostrar: mostrar,
-                        timestamp: Date.now()
-                    };
-                    console.log('Enviando mensaje toggleCartButtons:', message);
-                    window.opener.postMessage(message, '*');
-                } catch (error) {
-                    console.log('No se pudo enviar mensaje de botones al index:', error);
-                }
+            // MEJORA A2: Usar sistema de comunicación unificado para botones
+            if (window.sendToDashboard) {
+                window.sendToDashboard('toggleCartButtons', {
+                    mostrar: mostrar,
+                    timestamp: Date.now()
+                }).catch(error => {
+                    console.log('Error en comunicación unificada para botones, usando fallback:', error);
+                    // Fallback al método original
+                    if (window.opener && !window.opener.closed) {
+                        try {
+                            const message = {
+                                type: 'toggleCartButtons',
+                                mostrar: mostrar,
+                                timestamp: Date.now()
+                            };
+                            console.log('Enviando mensaje toggleCartButtons:', message);
+                            window.opener.postMessage(message, '*');
+                        } catch (error) {
+                            console.log('No se pudo enviar mensaje de botones al index:', error);
+                        }
+                    } else {
+                        console.log('No hay ventana index abierta, usando localStorage');
+                    }
+                });
             } else {
-                console.log('No hay ventana index abierta, usando localStorage');
+                // Fallback al método original si no está disponible el sistema unificado
+                if (window.opener && !window.opener.closed) {
+                    try {
+                        const message = {
+                            type: 'toggleCartButtons',
+                            mostrar: mostrar,
+                            timestamp: Date.now()
+                        };
+                        console.log('Enviando mensaje toggleCartButtons:', message);
+                        window.opener.postMessage(message, '*');
+                    } catch (error) {
+                        console.log('No se pudo enviar mensaje de botones al index:', error);
+                    }
+                } else {
+                    console.log('No hay ventana index abierta, usando localStorage');
+                }
             }
             
             // Usar localStorage como respaldo
