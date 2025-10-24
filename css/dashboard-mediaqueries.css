@@ -1,0 +1,480 @@
+/* ===================================
+   DASHBOARD - MEDIA QUERIES
+   =================================== */
+
+/* ===================================
+   TABLETS (768px - 1024px)
+   =================================== */
+@media (max-width: 1024px) {
+    .dashboard-sidebar {
+        width: 220px;
+    }
+    
+    .dashboard-main {
+        margin-left: 220px;
+    }
+    
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .module-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   MÓVILES LARGES (481px - 768px)
+   =================================== */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%;
+    }
+    
+    .dashboard-sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .dashboard-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .dashboard-main {
+        margin-left: 0;
+    }
+    
+    .dashboard-main.sidebar-open {
+        margin-left: 0;
+    }
+    
+    .content-wrapper {
+        padding: 10px;
+    }
+    
+    .module-header {
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .module-title {
+        font-size: 20px;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .header-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .grid-4,
+    .grid-3,
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .modal {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .toast {
+        min-width: 250px;
+        right: 10px;
+    }
+    
+    .toast-container {
+        right: 10px;
+    }
+}
+
+/* ===================================
+   MÓVILES PEQUEÑOS (320px - 480px)
+   =================================== */
+@media (max-width: 480px) {
+    .dashboard-header {
+        padding: 0 15px;
+    }
+    
+    .dashboard-title {
+        font-size: 18px;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 11px;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    .content-wrapper {
+        padding: 8px;
+    }
+    
+    .module-content {
+        padding: 15px;
+    }
+    
+    .module-title {
+        font-size: 18px;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .btn i {
+        font-size: 14px;
+    }
+    
+    .nav-link {
+        padding: 10px 15px;
+    }
+    
+    .nav-link span {
+        font-size: 14px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-title {
+        font-size: 16px;
+    }
+    
+    .form-control {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    .form-label {
+        font-size: 13px;
+    }
+    
+    .toast {
+        min-width: 200px;
+        padding: 12px 15px;
+    }
+    
+    .toast-message {
+        font-size: 13px;
+    }
+    
+    .empty-state {
+        padding: 40px 15px;
+    }
+    
+    .empty-state i {
+        font-size: 36px;
+    }
+    
+    .empty-state h3 {
+        font-size: 16px;
+    }
+    
+    .empty-state p {
+        font-size: 13px;
+    }
+}
+
+/* ===================================
+   ORIENTACIÓN LANDSCAPE EN MÓVILES
+   =================================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .dashboard-sidebar {
+        width: 280px;
+    }
+    
+    .dashboard-main {
+        margin-left: 0;
+    }
+    
+    .content-wrapper {
+        padding: 10px;
+    }
+    
+    .module-header {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .header-actions {
+        flex-direction: row;
+        width: auto;
+    }
+    
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   PANTALLAS MUY PEQUEÑAS (menos de 320px)
+   =================================== */
+@media (max-width: 320px) {
+    .dashboard-header {
+        padding: 0 10px;
+    }
+    
+    .dashboard-title {
+        font-size: 16px;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 5px;
+    }
+    
+    .module-content {
+        padding: 10px;
+    }
+    
+    .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+    }
+    
+    .nav-link span {
+        font-size: 13px;
+    }
+    
+    .card-body {
+        padding: 12px;
+    }
+    
+    .modal {
+        margin: 5px;
+        max-width: calc(100% - 10px);
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: 12px;
+    }
+    
+    .form-control {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .toast {
+        min-width: 180px;
+        padding: 10px 12px;
+    }
+}
+
+/* ===================================
+   PANTALLAS GRANDES (más de 1200px)
+   =================================== */
+@media (min-width: 1200px) {
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+    
+    .module-content {
+        padding: 30px;
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   PANTALLAS MUY GRANDES (más de 1400px)
+   =================================== */
+@media (min-width: 1400px) {
+    .content-wrapper {
+        max-width: 1400px;
+        padding: 40px;
+    }
+    
+    .module-content {
+        padding: 40px;
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===================================
+   IMPRESIÓN
+   =================================== */
+@media print {
+    .dashboard-sidebar,
+    .dashboard-header,
+    .btn,
+    .modal-overlay,
+    .toast-container {
+        display: none !important;
+    }
+    
+    .dashboard-main {
+        margin: 0 !important;
+    }
+    
+    .content-wrapper {
+        padding: 0 !important;
+    }
+    
+    .module-content {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        break-inside: avoid;
+    }
+}
+
+/* ===================================
+   MODO OSCURO (si se implementa en el futuro)
+   =================================== */
+/* MODO OSCURO DESACTIVADO - Se controla desde el dashboard */
+/*
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --border-color: #404040;
+    }
+    
+    .dashboard-header {
+        background: var(--bg-primary);
+        border-bottom-color: var(--border-color);
+    }
+    
+    .dashboard-sidebar {
+        background: var(--bg-primary);
+        border-right-color: var(--border-color);
+    }
+    
+    .module-content {
+        background: var(--bg-primary);
+    }
+    
+    .card {
+        background: var(--bg-primary);
+    }
+    
+    .form-control {
+        background-color: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    .modal {
+        background: var(--bg-primary);
+    }
+    
+    .toast {
+        background: var(--bg-primary);
+    }
+}
+
+/* ===================================
+   ACCESIBILIDAD
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===================================
+   ALTO CONTRASTE
+   =================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --shadow-light: 0 2px 4px rgba(0,0,0,0.3);
+        --shadow-medium: 0 4px 8px rgba(0,0,0,0.4);
+        --shadow-heavy: 0 8px 16px rgba(0,0,0,0.5);
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+    
+    .form-control {
+        border: 2px solid var(--border-color);
+    }
+    
+    .card {
+        border: 1px solid var(--border-color);
+    }
+}
+*/

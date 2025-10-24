@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/icon-128x128.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/icon-192x192.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e74c3c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Pedidos Admin">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CSS General Dashboard -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard-mediaqueries.css">
+    
+    <!-- CSS Módulos -->
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="css/promociones.css">
+    <link rel="stylesheet" href="css/categorias.css">
+    <link rel="stylesheet" href="css/metricas.css">
+    <link rel="stylesheet" href="css/configuracion.css">
+    <link rel="stylesheet" href="css/clientes.css"> <!-- Módulo de clientes -->
+    <link rel="stylesheet" href="css/usuarios.css">
+    <link rel="stylesheet" href="css/inventario.css"> <!-- Módulo de inventario -->
+    <link rel="stylesheet" href="css/pedidos.css"> <!-- Módulo de pedidos -->
+    <link rel="stylesheet" href="css/coming-soon.css"> <!-- Added for coming soon styles -->
+    <link rel="stylesheet" href="css/sidebar-optimization.css"> <!-- Added for sidebar optimization -->
+    <link rel="stylesheet" href="css/login.css"> <!-- Added for login styles -->
+    <!-- Nuevos sistemas -->
+    <link rel="stylesheet" href="css/cuotas.css"> <!-- Sistema de cuotas -->
+    <link rel="stylesheet" href="css/devoluciones.css"> <!-- Sistema de devoluciones -->
+</head>
+<body>
+    <!-- Header del Dashboard -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo-section">
+                <h1 class="dashboard-title"></h1>
+                <span class="dashboard-subtitle"></span>
+            </div>
+        </div>
+        <div class="header-right">
+           
+            <div class="user-info">
+                <span class="user-name">Admin</span>
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <button class="notifications-btn" id="notificationsBtn" title="Notificaciones">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count" id="notificationCount">0</span>
+                </button>
+                <button class="logout-btn" id="logoutBtn" title="Cerrar Sesión">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notifications Dropdown -->
+    <div class="notifications-dropdown" id="notificationsDropdown">
+        <div class="notifications-header">
+            <h4>🚨 Alertas</h4>
+            <button class="view-all-btn" onclick="switchTab('alerts')">Ver todas</button>
+        </div>
+        <div class="notifications-content" id="notificationsContent">
+            <!-- Las alertas se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-module="productos">
+                        <i class="fas fa-box"></i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="pedidos">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="promociones">
+                        <i class="fas fa-image"></i>
+                        <span>Promociones</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="categorias">
+                        <i class="fas fa-tags"></i>
+                        <span>Categorías</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="metricas">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Métricas</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="clientes">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="reportes">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Reportes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="usuarios">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-module="configuracion">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="dashboard-main">
+        <div class="content-wrapper">
+            <!-- Módulo Productos -->
+            <section class="module-section active" id="productosModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Productos</h2>
+                    <div class="module-actions">
+                        <button class="btn btn-secondary" id="btnGestionarInventario">
+                            <i class="fas fa-warehouse"></i>
+                            Inventario Avanzado
+                        </button>
+                        <button class="btn btn-primary" id="btnNuevoProducto">
+                            <i class="fas fa-plus"></i>
+                            Nuevo Producto
+                        </button>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Los productos se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Promociones -->
+            <section class="module-section" id="promocionesModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Promociones</h2>
+                    <button class="btn btn-primary" id="btnNuevaPromocion">
+                        <i class="fas fa-plus"></i>
+                        Nueva Promoción
+                    </button>
+                </div>
+                <div class="module-content">
+                    <div class="promociones-grid" id="promocionesGrid">
+                        <!-- Las promociones se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Pedidos -->
+            <section class="module-section" id="pedidosModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Pedidos</h2>
+                    <div class="module-actions">
+                        <button class="btn btn-success" id="btnProcesarVentas" disabled>
+                            <i class="fas fa-cash-register"></i>
+                            Procesar Ventas
+                        </button>
+                        <button class="btn btn-info" id="btnDeliveryConfig">
+                            <i class="fas fa-truck"></i>
+                            Configurar Delivery
+                        </button>
+                        <button class="btn btn-primary" id="btnNuevoPedido">
+                            <i class="fas fa-cash-register"></i>
+                            Caja
+                        </button>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div class="pedidos-content" id="pedidosContent">
+                        <div class="pedidos-controls">
+                            <div class="search-box">
+                                <input type="text" class="search-input" id="pedidosSearch" placeholder="Buscar pedidos...">
+                                <i class="fas fa-search search-icon"></i>
+                            </div>
+                            <div class="filter-group">
+                                <select class="filter-select" id="estadoFilter">
+                                    <option value="">Todos los estados</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="pagado">Pagado</option>
+                                    <option value="procesado">Procesado</option>
+                                    <option value="cancelado">Cancelado</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <input type="date" class="filter-input" id="fechaFilter" placeholder="Filtrar por fecha">
+                            </div>
+                        </div>
+                        <div class="pedidos-grid" id="pedidosGrid">
+                            <!-- Los pedidos se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Categorías -->
+            <section class="module-section" id="categoriasModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Categorías</h2>
+                </div>
+                <div class="module-content">
+                    <div class="categorias-content" id="categoriasContent">
+                        <!-- Las categorías se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Métricas -->
+            <section class="module-section" id="metricasModule">
+                <div class="module-header">
+                    <h2 class="module-title">Métricas y Analytics</h2>
+                </div>
+                <div class="module-content">
+                    <div class="metrics-content" id="metricsContent">
+                        <!-- Las métricas se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Módulo Clientes -->
+            <section class="module-section" id="clientesModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Clientes</h2>
+                </div>
+                <div class="module-content">
+                    <div class="clientes-content" id="clientesContent">
+                        <div class="clients-grid" id="clientsGrid">
+                            <!-- El contenido se cargará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Inventario -->
+            <section class="module-section" id="inventarioModule">
+                <div class="module-header">
+                    <h2 class="module-title">Control de Inventario</h2>
+                    <button class="btn btn-primary" id="btnAjusteInventario">
+                        <i class="fas fa-plus"></i>
+                        Ajuste de Stock
+                    </button>
+                </div>
+                <div class="module-content">
+                    <div class="inventario-content" id="inventarioContent">
+                        <div class="coming-soon">
+                            <i class="fas fa-warehouse"></i>
+                            <h3>Módulo en Producción</h3>
+                            <p>El sistema de inventario estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Reportes -->
+            <section class="module-section" id="reportesModule">
+                <div class="module-header">
+                    <h2 class="module-title">Reportes y Analytics</h2>
+                    <button class="btn btn-primary" id="btnGenerarReporte">
+                        <i class="fas fa-download"></i>
+                        Generar Reporte
+                    </button>
+                </div>
+                <div class="module-content">
+                    <div class="reportes-content" id="reportesContent">
+                        <div class="coming-soon">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Módulo en Producción</h3>
+                            <p>El sistema de reportes estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Usuarios -->
+            <section class="module-section" id="usuariosModule">
+                <div class="module-header">
+                    <h2 class="module-title">Gestión de Usuarios</h2>
+                    <button class="btn btn-primary" id="btnNuevoUsuario">
+                        <i class="fas fa-plus"></i>
+                        Nuevo Usuario
+                    </button>
+                </div>
+                <div class="module-content">
+                    <div class="usuarios-content" id="usuariosContent">
+                        <div class="users-grid" id="usersGrid">
+                            <!-- El contenido se cargará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Configuración -->
+            <section class="module-section" id="configuracionModule">
+                <div class="module-header">
+                    <h2 class="module-title">Configuración del Negocio</h2>
+                </div>
+                <div class="module-content">
+                    <div class="config-content" id="configContent">
+                        <!-- La configuración se cargará dinámicamente -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modales -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Título del Modal</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- El contenido del modal se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <div class="login-header">
+                <div class="login-logo">
+                    <span class="logo-text">ADMINISTRADOR</span>
+                    <span class="logo-subtitle">Dashboard</span>
+                </div>
+                <h2>Iniciar Sesión</h2>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="Ingresa tu usuario" autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required 
+                           placeholder="Ingresa tu contraseña" autocomplete="current-password">
+                </div>
+                
+                <div class="login-error" id="loginError" style="display: none;"></div>
+                
+                <button type="submit" class="btn btn-primary btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/login.js"></script> <!-- Sistema de login -->
+    <script src="js/productos.js"></script> <!-- Módulo de productos -->
+    <script src="js/categorias.js"></script> <!-- Módulo de categorías -->
+    <script src="js/promociones.js"></script> <!-- Módulo de promociones -->
+    <script src="js/metricas.js"></script> <!-- Módulo de métricas -->
+    <script src="js/configuracion.js"></script> <!-- Módulo de configuración -->
+    <script src="js/clientes.js"></script> <!-- Módulo de clientes -->
+    <script src="js/usuarios.js"></script>
+    <script src="js/pedidos.js"></script> <!-- Módulo de usuarios -->
+    <!-- Nuevos sistemas -->
+    <script src="js/cuotas.js"></script> <!-- Sistema de cuotas -->
+    <script src="js/devoluciones.js"></script> <!-- Sistema de devoluciones -->
+    <script src="js/dashboard.js"></script> <!-- Dashboard principal (debe ir al final) -->
+    
+    <!-- PWA Service Worker -->
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registrado exitosamente:', registration.scope);
+                        
+                        // Verificar actualizaciones
+                        registration.addEventListener('updatefound', function() {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', function() {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Nueva versión disponible
+                                    if (confirm('Nueva versión disponible. ¿Recargar para actualizar?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+        
+        // Manejar instalación de PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', function(e) {
+            console.log('📱 PWA: Prompt de instalación disponible');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Mostrar botón de instalación personalizado
+            showInstallButton();
+        });
+        
+        function showInstallButton() {
+            // Crear botón de instalación
+            const installButton = document.createElement('button');
+            installButton.innerHTML = '<i class="fas fa-download"></i> Instalar App';
+            installButton.className = 'install-pwa-btn';
+            installButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 25px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+            `;
+            
+            installButton.addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choiceResult) {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('✅ Usuario aceptó instalar la PWA');
+                        } else {
+                            console.log('❌ Usuario rechazó instalar la PWA');
+                        }
+                        deferredPrompt = null;
+                        installButton.remove();
+                    });
+                }
+            });
+            
+            document.body.appendChild(installButton);
+            
+            // Auto-ocultar después de 10 segundos
+            setTimeout(() => {
+                if (installButton.parentNode) {
+                    installButton.remove();
+                }
+            }, 10000);
+        }
+        
+        // Manejar instalación completada
+        window.addEventListener('appinstalled', function() {
+            console.log('🎉 PWA instalada exitosamente');
+        });
+    </script>
+    
+    <!-- Script para aplicar configuración de logo al cargar dashboard -->
+    <script>
+        // Aplicar configuración de logo al cargar el dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar configuración del logo desde localStorage
+            const logoData = JSON.parse(localStorage.getItem('logoConfig') || '{}');
+            const configData = JSON.parse(localStorage.getItem('dashboardConfig') || '{}');
+            
+            // Aplicar logo text si existe
+            const dashboardTitle = document.querySelector('.dashboard-title');
+            if (dashboardTitle && (logoData.logoText || configData.design?.logoText)) {
+                dashboardTitle.textContent = logoData.logoText || configData.design.logoText;
+                console.log('Dashboard title cargado:', logoData.logoText || configData.design.logoText);
+            }
+            
+            // Aplicar slogan si existe
+            const dashboardSubtitle = document.querySelector('.dashboard-subtitle');
+            if (dashboardSubtitle && (logoData.slogan || configData.design?.businessSlogan)) {
+                dashboardSubtitle.textContent = logoData.slogan || configData.design.businessSlogan;
+                console.log('Dashboard subtitle cargado:', logoData.slogan || configData.design.businessSlogan);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,762 @@
+/* ===================================
+   ESTILOS PARA PEDIDOS DEL USUARIO
+   =================================== */
+
+/* Header del módulo */
+.pedidos-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pedidos-header .module-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Botón de limpiar historial */
+.btn-limpiar-historial {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-limpiar-historial:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.btn-limpiar-historial:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(220, 53, 69, 0.3);
+}
+
+/* Tabs de pedidos */
+.pedidos-tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 0;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    min-width: max-content;
+    flex-shrink: 0;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.tab-btn.active {
+    color: #e74c3c;
+    border-bottom-color: #e74c3c;
+    background: white;
+}
+
+.tab-btn i {
+    font-size: 1rem;
+}
+
+.tab-count {
+    background: #6c757d;
+    color: white;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 18px;
+    text-align: center;
+}
+
+.tab-btn.active .tab-count {
+    background: #e74c3c;
+}
+
+/* Contenido de tabs */
+.pedidos-content {
+    background: white;
+    min-height: 400px;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Lista de pedidos */
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Tarjetas de pedidos - Estilo simplificado para index */
+.order-card {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction:column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.order-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #d1d5db;
+}
+
+/* Información del pedido - Lado izquierdo */
+.pedido-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pedido-numero {
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pedido-fecha {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0;
+}
+
+.pedido-cliente {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0;
+}
+
+.pedido-total {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Estado del pedido - Centro */
+.pedido-estado {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.estado-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.estado-badge.status-pending {
+    background: #f97316;
+    color: white;
+}
+
+.estado-badge.status-paid {
+    background: #22c55e;
+    color: white;
+}
+
+.estado-badge.status-cancelled {
+    background: #ef4444;
+    color: white;
+}
+
+/* Acciones del pedido - Lado derecho */
+.pedido-acciones {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pedido-acciones .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pedido-acciones .btn-primary {
+    background: #3b82f6;
+    color: white;
+}
+
+.pedido-acciones .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.order-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.order-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.order-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-paid {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Items del pedido */
+.order-items {
+    margin-bottom: 15px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    flex: 1;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.item-quantity {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin: 0 10px;
+}
+
+.item-price {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+/* Footer del pedido */
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #f1f3f4;
+}
+
+.order-total {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.order-total span {
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+.order-total strong {
+    font-size: 1.1rem;
+    color: #e74c3c;
+}
+
+.delivery-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estados vacíos */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #495057;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Detalles del pedido en modal */
+.order-details {
+    padding: 20px;
+}
+
+.order-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.order-details-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+
+.order-details-status {
+    margin-bottom: 20px;
+}
+
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.order-details-items h4,
+.order-details-delivery h4,
+.order-details-total h4 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.order-details-delivery {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.order-details-delivery p {
+    margin: 5px 0;
+    color: #495057;
+}
+
+.total-breakdown {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    color: #495057;
+}
+
+.total-final {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #e74c3c;
+    border-top: 2px solid #e9ecef;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pedidos-header {
+        padding: 15px;
+    }
+    
+    .pedidos-header .module-title {
+        font-size: 1.3rem;
+    }
+    
+    .tab-btn {
+        padding: 12px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .order-card {
+        padding: 15px;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .order-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .order-actions {
+        justify-content: center;
+    }
+    
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .item-quantity {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .tab-btn span {
+        display: none;
+    }
+    
+    .order-card {
+        padding: 12px;
+    }
+    
+    .order-actions {
+        flex-direction: column;
+    }
+    
+    .order-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   ESTILOS PARA INFORMACIÓN DE CUOTAS
+   =================================== */
+
+.cuotas-info-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cuotas-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.cuotas-header i {
+    color: #28a745;
+    font-size: 16px;
+}
+
+.cuotas-title {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.cuotas-progress {
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.progress-text {
+    text-align: center;
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.cuotas-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cuota-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.cuota-label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.cuota-value {
+    font-weight: 600;
+    color: #495057;
+}
+
+.cuota-value.pending {
+    color: #ffc107;
+}
+
+.cuota-value.completed {
+    color: #28a745;
+}
+
+/* Responsive para cuotas */
+@media (max-width: 768px) {
+    .cuotas-info-card {
+        padding: 10px;
+        margin-top: 8px;
+    }
+    
+    .cuotas-details {
+        gap: 4px;
+    }
+    
+    .cuota-item {
+        font-size: 12px;
+    }
+    
+    .cuotas-title {
+        font-size: 13px;
+    }
+}
+
+/* Estilos para el modal de pedidos */
+.order-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.order-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.order-details {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.order-details-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.order-details-header h3 {
+    margin: 0 0 8px 0;
+    color: #495057;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.order-date {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.order-details-items h4 {
+    margin: 0 0 15px 0;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 8px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-weight: 500;
+    color: #495057;
+    flex: 1;
+}
+
+.item-quantity {
+    color: #6c757d;
+    font-size: 14px;
+    margin: 0 15px;
+}
+
+.item-price {
+    font-weight: 600;
+    color: #28a745;
+    font-size: 16px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .order-modal {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .item-quantity {
+        margin: 0;
+    }
+}

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tienda en linea</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/icon-128x128.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/icon-192x192.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e74c3c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Pedidos">
+    
+    <!-- CSS General -->
+    <link rel="stylesheet" href="css/index.css?v=20241220">
+    <link rel="stylesheet" href="css/pedidos-usuario.css?v=20241220">
+    <link rel="stylesheet" href="css/colors.css?v=20241220">
+    <link rel="stylesheet" href="css/mediaquerys.css?v=20241220">
+    <link rel="stylesheet" href="css/hero-promociones.css?v=20241220">
+    
+    <!-- CSS Módulos -->
+    <link rel="stylesheet" href="css/ofertas.css">
+    <link rel="stylesheet" href="css/lonuevo.css">
+    <link rel="stylesheet" href="css/categorias.css">
+    <link rel="stylesheet" href="css/outlet.css">
+    <link rel="stylesheet" href="css/asesoria.css">
+    <link rel="stylesheet" href="css/deseo.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <!-- Nuevos sistemas -->
+    <link rel="stylesheet" href="css/cuotas.css">
+    <link rel="stylesheet" href="css/devoluciones.css">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img class="logo-image" id="logoImage" style="display: none;" alt="Logo">
+                <div class="logo-text-container">
+                    <span class="logo-text"></span>
+                    <span class="logo-subtitle"></span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="btnSearch">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="header-btn" id="btnCarrito">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Barra de Búsqueda (oculta por defecto) -->
+        <div class="search-bar" id="searchBar" style="display: none;">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Buscar productos...">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider Promociones -->
+    <section class="hero-promociones" id="heroPromociones">
+        <div class="hero-slider-container" id="heroSliderContainer">
+            <div class="hero-slider-wrapper" id="heroSliderWrapper">
+                <!-- Los slides se generarán dinámicamente con JS -->
+            </div>
+            
+            <!-- Controles de navegación -->
+            <button class="hero-nav-btn hero-nav-prev" id="heroPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="hero-nav-btn hero-nav-next" id="heroNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- Indicadores -->
+            <div class="hero-indicators" id="heroIndicators">
+                <!-- Los indicadores se generarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contenedor Principal -->
+    <main class="main-content">
+        
+        <!-- Grid de Productos -->
+        <div class="products-grid" id="productsGrid">
+            
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="1">
+                    <span class="discount-badge">-5%</span>
+                    <div class="cuotas-badge" id="cuotas-badge-1" style="display: none;">
+                        <i class="fas fa-credit-card"></i>
+                        <span id="cuotas-text-1">Crédito</span>
+                    </div>
+                    <img src="img/productos/microonda.jpg" alt="Microonda Damasco EM720C" class="product-image" onerror="this.style.display='none'">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">DAMASCO</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Microonda Damasco EM720C</h3>
+                    <p class="product-description">Microonda moderna con múltiples funciones</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 85.50</span>
+                            <span class="price-old">USD 90.00</span>
+                    <div class="cuotas-info" id="cuotas-info-1" style="display: none;">
+                        <span class="cuota-precio" id="cuota-precio-1">USD 28.50/cuota</span>
+                        <span class="cuota-texto" id="cuota-texto-1">3 cuotas sin interés</span>
+                    </div>
+                        </div>
+                        <button class="like-btn" data-product="1">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="2">
+                    <span class="discount-badge">-5%</span>
+                    <img src="img/placeholder.svg" alt="Producto 2" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">Midea</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Microondas Midea 30L 10...</h3>
+                    <p class="product-description">Microondas de alta capacidad con diseño moderno</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 90.25</span>
+                            <span class="price-old">USD 95.00</span>
+                        </div>
+                        <button class="like-btn" data-product="2">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="3">
+                    <span class="discount-badge">-10%</span>
+                    <div class="cuotas-badge" id="cuotas-badge-3" style="display: none;">
+                        <i class="fas fa-credit-card"></i>
+                        <span id="cuotas-text-3">Crédito</span>
+                    </div>
+                    <img src="img/placeholder.svg" alt="Producto 3" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">SAMSUNG</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Refrigeradora Samsung RT50</h3>
+                    <p class="product-description">Refrigeradora de dos puertas con tecnología frost</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 125.40</span>
+                            <span class="price-old">USD 139.33</span>
+                            <div class="cuotas-info" id="cuotas-info-3" style="display: none;">
+                                <span class="cuota-precio" id="cuota-precio-3">USD 20.90/cuota</span>
+                                <span class="cuota-texto" id="cuota-texto-3">6 cuotas sin interés</span>
+                            </div>
+                        </div>
+                        <button class="like-btn" data-product="3">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="4">
+                    <span class="discount-badge">-15%</span>
+                    <img src="img/placeholder.svg" alt="Producto 4" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">LG</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Lavadora LG 15KG</h3>
+                    <p class="product-description">Lavadora automática de alta capacidad</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 79.80</span>
+                            <span class="price-old">USD 93.88</span>
+                        </div>
+                        <button class="like-btn" data-product="4">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="5">
+                    <span class="discount-badge">-20%</span>
+                    <img src="img/placeholder.svg" alt="Producto 5" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">Samsung</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Refrigeradora Samsung 300L</h3>
+                    <p class="product-description">Refrigeradora de dos puertas con tecnología inverter</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 450.00</span>
+                            <span class="price-old">USD 562.50</span>
+                        </div>
+                        <button class="like-btn" data-product="5">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="6">
+                    <span class="discount-badge">-10%</span>
+                    <img src="img/placeholder.svg" alt="Producto 6" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">LG</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Lavadora LG 15kg</h3>
+                    <p class="product-description">Lavadora de carga frontal con tecnología TurboWash</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 380.50</span>
+                            <span class="price-old">USD 422.78</span>
+                        </div>
+                        <button class="like-btn" data-product="6">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="product-card">
+                <div class="product-image-container" data-product="7">
+                    <span class="discount-badge">-25%</span>
+                    <img src="img/placeholder.svg" alt="Producto 7" class="product-image">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-brand">Sony</div>
+                    
+                    <div class="product-rating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                    </div>
+                    
+                    <h3 class="product-name">Televisor Smart 55"</h3>
+                    <p class="product-description">Smart TV 4K con Android TV y HDR</p>
+                    
+                    <div class="product-price-container">
+                        <div class="price-info">
+                            <span class="price-current">USD 650.75</span>
+                            <span class="price-old">USD 867.67</span>
+                        </div>
+                        <button class="like-btn" data-product="7">
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Sección de Pedidos del Usuario -->
+        <section class="module-section" id="pedidosModule">
+            <div class="module-content">
+                <!-- El contenido se cargará dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Quick Preview -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <span class="modal-discount-badge">-5%</span>
+                    <img src="img/placeholder.svg" alt="Producto" class="modal-product-image" id="modalImage">
+                </div>
+                
+                <div class="modal-info">
+                    <div class="modal-brand" id="modalBrand">DAMASCO</div>
+                    
+                    <div class="product-rating" id="modalRating">
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star star-active"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <h2 class="modal-name" id="modalName">Nombre del Producto</h2>
+                    <p class="modal-description" id="modalDescription">Descripción del producto</p>
+                    
+                    <div class="modal-price-container">
+                        <div class="modal-price-info">
+                            <span class="modal-price-current" id="modalPrice">USD 85.50</span>
+                            <span class="modal-price-old" id="modalPriceOld">USD 90.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="modal-btn-pedir">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                        <button class="modal-btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Módulo Usuario -->
+    <section class="module-section" id="usuarioModule" style="display: none;">
+        <div class="module-content">
+            <!-- El contenido se cargará dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Módulo Deseos (lonuevo) -->
+    <section class="module-section" id="lonuevoModule" style="display: none;">
+        <div class="module-content">
+            <!-- El contenido se cargará dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Menú Inferior -->
+    <nav class="bottom-menu">
+        <button class="menu-btn" data-module="pedidos">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Pedidos</span>
+        </button>
+        
+        <button class="menu-btn" data-module="categorias" id="btnCategorias">
+            <i class="fas fa-th"></i>
+            <span>Menú</span>
+        </button>
+        
+        <button class="menu-btn" data-module="outlet">
+            <i class="fas fa-store"></i>
+            <span>Catálogo</span>
+        </button>
+        
+        <button class="menu-btn" data-module="lonuevo">
+            <i class="fas fa-heart"></i>
+            <span>Deseo</span>
+        </button>
+        
+        <button class="menu-btn" data-module="usuario">
+            <i class="fas fa-user"></i>
+            <span>Usuario</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Categorías -->
+    <div class="categories-modal" id="categoriesModal">
+        <div class="categories-content">
+            <div class="categories-header">
+                <h3>Categorías</h3>
+                <button class="categories-close" id="categoriesClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="categories-list" id="categoriesList">
+                <button class="category-item active" data-category="todas">
+                    <i class="fas fa-th-large"></i>
+                    <span>Todas las Categorías</span>
+                </button>
+                <button class="category-item" data-category="cat-1">
+                    <i class="fas fa-laptop"></i>
+                    <span>Categoría 1</span>
+                </button>
+                <button class="category-item" data-category="cat-2">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Categoría 2</span>
+                </button>
+                <button class="category-item" data-category="cat-3">
+                    <i class="fas fa-tv"></i>
+                    <span>Categoría 3</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de Subcategorías -->
+    <div class="subcategory-container" id="subcategoryContainer" style="display: none;">
+        <div class="subcategory-scroll" id="subcategoryScroll">
+            <!-- Las subcategorías se cargarán dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Modal de Autenticación -->
+    <div class="auth-modal-overlay" id="authModalOverlay">
+        <div class="auth-modal">
+            <div class="auth-modal-header">
+                <h2 class="auth-modal-title">Mi Cuenta</h2>
+                <button class="auth-modal-close" id="authModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="auth-modal-body">
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+                    <button class="auth-tab" data-tab="register">Registrarse</button>
+                </div>
+                
+                <!-- Formulario de Login -->
+                <form class="auth-form active" id="loginForm">
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Teléfono</label>
+                        <input type="tel" class="auth-form-input" id="loginPhone" placeholder="Ej: +584121234567" required>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Contraseña</label>
+                        <input type="password" class="auth-form-input" id="loginPassword" placeholder="Tu contraseña" required>
+                    </div>
+                    
+                    <div class="auth-forgot-password">
+                        <a href="#" class="auth-forgot-link" data-tab="forgot">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn-submit">Iniciar Sesión</button>
+                    
+                    <div class="auth-divider">
+                        <span>o continúa con</span>
+                    </div>
+                    
+                    <button type="button" class="auth-btn-google" id="btnGoogleSignIn" style="display: none;">
+                        <img src="https://www.google.com/favicon.ico" alt="Google">
+                        Continuar con Google
+                    </button>
+                </form>
+                
+                <!-- Formulario de Registro -->
+                <form class="auth-form" id="registerForm">
+                    <div class="auth-form-row">
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Nombre y Apellido</label>
+                            <input type="text" class="auth-form-input" id="registerNombre" placeholder="Nombre" required>
+                        </div>
+                    
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Teléfono</label>
+                        <input type="tel" class="auth-form-input" id="registerPhone" placeholder="Ej: +584121234567" required>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Ciudad</label>
+                        <input type="text" class="auth-form-input" id="registerCiudad" placeholder="Tu ciudad" required>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Dirección</label>
+                        <input type="text" class="auth-form-input" id="registerDireccion" placeholder="Tu dirección completa" required>
+                    </div>
+                    
+                    <div class="auth-form-row">
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Año de Nacimiento</label>
+                            <input type="number" class="auth-form-input" id="registerAnoNacimiento" placeholder="Ej: 1990" min="1950" max="2005" required>
+                        </div>
+                        
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Género</label>
+                            <select class="auth-form-input" id="registerGenero" required>
+                                <option value="">Selecciona tu género</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="prefiero_no_decir">Prefiero no decir</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Contraseña</label>
+                        <input type="password" class="auth-form-input" id="registerPassword" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Confirmar Contraseña</label>
+                        <input type="password" class="auth-form-input" id="registerConfirmPassword" placeholder="Repite tu contraseña" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn-submit">Crear Cuenta</button>
+                    
+                    <div class="auth-divider">
+                        <span>o regístrate con</span>
+                    </div>
+                    
+                    <button type="button" class="auth-btn-google" id="btnGoogleSignUp" style="display: none;">
+                        <img src="https://www.google.com/favicon.ico" alt="Google">
+                        Registrarse con Google
+                    </button>
+                </form>
+                
+                <!-- Formulario de Recuperar Contraseña -->
+                <form class="auth-form" id="forgotForm">
+                    <p style="color: #666; margin-bottom: 20px;">Ingresa tu teléfono y te enviaremos instrucciones para recuperar tu contraseña.</p>
+                    
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Teléfono</label>
+                        <input type="tel" class="auth-form-input" id="forgotPhone" placeholder="Ej: +584121234567" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn-submit">Enviar Código</button>
+                    
+                    <div class="auth-forgot-password">
+                        <a href="#" class="auth-forgot-link" data-tab="login">Volver al inicio de sesión</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h2 class="cart-header-title">Mi Carrito</h2>
+            <button class="cart-close-btn" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-body">
+            <div class="cart-empty" id="cartEmpty">
+                <i class="fas fa-shopping-cart cart-empty-icon"></i>
+                <p class="cart-empty-text">Tu carrito está vacío</p>
+                <p class="cart-empty-subtext">Agrega productos para comenzar tu compra</p>
+            </div>
+            
+            <div class="cart-items" id="cartItems" style="display: none;">
+                <!-- Los items se cargarán dinámicamente -->
+            </div>
+        </div>
+        
+        <div class="cart-footer" style="display: none;">
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">USD 0.00</span>
+            </div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cartTotal">USD 0.00</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-checkout" id="btnCheckout">
+                    <i class="fas fa-shopping-cart"></i>
+                    Confirmar Pedido
+                </button>
+                <button class="btn-clear-cart" id="btnClearCart">
+                    <i class="fas fa-trash"></i> Vaciar Carrito
+                </button>
+            </div>
+          
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/configuracion.js?v=20241220"></script> <!-- Cargar primero para tener getWhatsAppLink -->
+    <script src="js/debug.js?v=20241220"></script>
+    <script src="js/hero-promociones.js?v=20241220"></script>
+    <script src="js/auth.js?v=20241220"></script>
+    <script src="js/index.js?v=20241220"></script>
+    <script src="js/ofertas.js?v=20241220"></script>
+    <script src="js/lonuevo.js?v=20241220"></script>
+    <script src="js/categorias.js?v=20241220"></script> <!-- Módulo de categorías (datos) -->
+    <script src="js/categorias-index.js?v=20241220"></script> <!-- Script para el menú de categorías -->
+    <script src="js/outlet.js?v=20241220"></script>
+   
+    <script src="js/deseo.js?v=20241220"></script>
+    <script src="js/carrito.js?v=20241220"></script>
+    <script src="js/pedidos-usuario.js?v=20241220"></script> <!-- Módulo de pedidos del usuario -->
+    <script src="js/menu-funcional.js?v=20241220"></script> <!-- Menú funcional -->
+    <!-- Nuevos sistemas -->
+    <script src="js/cuotas.js?v=20241220"></script> <!-- Sistema de cuotas -->
+    <script src="js/devoluciones.js?v=20241220"></script> <!-- Sistema de devoluciones -->
+    
+    <!-- Script para cerrar modales inmediatamente -->
+    <script>
+        // Cerrar modales inmediatamente (antes de que se cargue todo)
+        (function() {
+            const quickViewModal = document.getElementById('modalOverlay');
+            const confirmModal = document.getElementById('confirmModalOverlay');
+            
+            if (quickViewModal) {
+                quickViewModal.style.display = 'none';
+                quickViewModal.style.visibility = 'hidden';
+                quickViewModal.style.opacity = '0';
+                quickViewModal.classList.remove('active');
+            }
+            
+            if (confirmModal) {
+                confirmModal.style.display = 'none';
+                confirmModal.style.visibility = 'hidden';
+                confirmModal.style.opacity = '0';
+                confirmModal.classList.remove('active');
+            }
+            
+            document.body.style.overflow = '';
+        })();
+    </script>
+    
+    <!-- Script para control de visibilidad desde dashboard -->
+    <script>
+        // Aplicar visibilidad al cargar la página (optimizado)
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.aplicarVisibilidadDesdeConfig) {
+                window.aplicarVisibilidadDesdeConfig();
+            }
+            
+            // Aplicar configuración de logo al cargar
+            aplicarConfiguracionLogo();
+        });
+        
+        // Escuchar mensajes del dashboard (consolidado y optimizado)
+        if (!window.dashboardMessageListenerAdded) {
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'toggleVisibility') {
+                    const { icon, mostrar, timestamp } = event.data;
+                    
+                    // Aplicar cambio inmediatamente
+                    if (icon === 'cart') {
+                        const btnCarrito = document.getElementById('btnCarrito');
+                        if (btnCarrito) {
+                            btnCarrito.style.display = mostrar ? 'block' : 'none';
+                            btnCarrito.style.transition = 'opacity 0.2s ease';
+                        }
+                    } else if (icon === 'pedidos') {
+                        const btnPedidos = document.querySelector('[data-module="pedidos"]');
+                        if (btnPedidos) {
+                            btnPedidos.style.display = mostrar ? 'flex' : 'none';
+                            btnPedidos.style.transition = 'opacity 0.2s ease';
+                        }
+                    }
+                    
+                    console.log(`Toggle ${icon}: ${mostrar ? 'ON' : 'OFF'} - ${timestamp}`);
+                }
+                
+                // Escuchar cambios de logo
+                if (event.data && event.data.type === 'updateLogo') {
+                    const { logoText, slogan, logoType, logoImage, timestamp } = event.data;
+                    
+                    // Actualizar logo text
+                    const logoTextElement = document.querySelector('.logo-text');
+                    if (logoTextElement && logoText) {
+                        logoTextElement.textContent = logoText;
+                    }
+                    
+                    // Actualizar slogan
+                    const logoSubtitleElement = document.querySelector('.logo-subtitle');
+                    if (logoSubtitleElement && slogan) {
+                        logoSubtitleElement.textContent = slogan;
+                    }
+                    
+                    // Actualizar logo image
+                    const logoImageElement = document.getElementById('logoImage');
+                    const logoTextContainer = document.querySelector('.logo-text-container');
+                    
+                    if (logoType === 'image' && logoImage) {
+                        if (logoImageElement) {
+                            logoImageElement.src = logoImage;
+                            logoImageElement.style.display = 'block';
+                        }
+                        if (logoTextContainer) {
+                            logoTextContainer.style.display = 'none';
+                        }
+                    } else {
+                        if (logoImageElement) {
+                            logoImageElement.style.display = 'none';
+                        }
+                        if (logoTextContainer) {
+                            logoTextContainer.style.display = 'flex';
+                        }
+                    }
+                    
+                    console.log(`Logo actualizado: ${logoText} - ${slogan} - ${timestamp}`);
+                }
+            });
+            window.dashboardMessageListenerAdded = true;
+        }
+        
+        // Función para aplicar configuración de logo al cargar la página
+        function aplicarConfiguracionLogo() {
+            const logoData = JSON.parse(localStorage.getItem('logoConfig') || '{}');
+            
+            // Aplicar logo text si existe
+            const logoTextElement = document.querySelector('.logo-text');
+            if (logoTextElement && logoData.logoText) {
+                logoTextElement.textContent = logoData.logoText;
+            }
+            
+            // Aplicar slogan si existe
+            const logoSubtitleElement = document.querySelector('.logo-subtitle');
+            if (logoSubtitleElement && logoData.slogan) {
+                logoSubtitleElement.textContent = logoData.slogan;
+            }
+            
+            // Aplicar logo image si existe
+            const logoImageElement = document.getElementById('logoImage');
+            const logoTextContainer = document.querySelector('.logo-text-container');
+            
+            if (logoData.logoType === 'image' && logoData.logoImage) {
+                if (logoImageElement) {
+                    logoImageElement.src = logoData.logoImage;
+                    logoImageElement.style.display = 'block';
+                }
+                if (logoTextContainer) {
+                    logoTextContainer.style.display = 'none';
+                }
+            } else {
+                if (logoImageElement) {
+                    logoImageElement.style.display = 'none';
+                }
+                if (logoTextContainer) {
+                    logoTextContainer.style.display = 'flex';
+                }
+            }
+        }
+    </script>
+    
+    <!-- PWA Service Worker -->
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registrado exitosamente:', registration.scope);
+                        
+                        // Verificar actualizaciones
+                        registration.addEventListener('updatefound', function() {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', function() {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Nueva versión disponible
+                                    if (confirm('Nueva versión disponible. ¿Recargar para actualizar?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+        
+        // Manejar instalación de PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', function(e) {
+            console.log('📱 PWA: Prompt de instalación disponible');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Mostrar botón de instalación personalizado
+            showInstallButton();
+        });
+        
+        function showInstallButton() {
+            // Crear botón de instalación
+            const installButton = document.createElement('button');
+            installButton.innerHTML = '<i class="fas fa-download"></i> Instalar App';
+            installButton.className = 'install-pwa-btn';
+            installButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 25px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+            `;
+            
+            installButton.addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choiceResult) {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('✅ Usuario aceptó instalar la PWA');
+                        } else {
+                            console.log('❌ Usuario rechazó instalar la PWA');
+                        }
+                        deferredPrompt = null;
+                        installButton.remove();
+                    });
+                }
+            });
+            
+            document.body.appendChild(installButton);
+            
+            // Auto-ocultar después de 10 segundos
+            setTimeout(() => {
+                if (installButton.parentNode) {
+                    installButton.remove();
+                }
+            }, 10000);
+        }
+        
+        // Manejar instalación completada
+        window.addEventListener('appinstalled', function() {
+            console.log('🎉 PWA instalada exitosamente');
+        });
+    </script>
+    
+    <!-- Contenedor de Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <!-- Botón de emergencia para cerrar modales -->
+    <button id="emergencyCloseBtn" class="emergency-close-btn" onclick="forceCloseModal()" style="display: none;">
+        <i class="fas fa-times"></i>
+    </button>
+    
+    <!-- Modal de Confirmación de Pedido -->
+    <div class="modal-overlay" id="confirmModalOverlay">
+        <div class="modal" id="confirmModal">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmar Pedido</h3>
+                <button class="modal-close" id="confirmModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="confirmModalBody">
+                <!-- Contenido del modal se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

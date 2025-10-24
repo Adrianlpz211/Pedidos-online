@@ -1,0 +1,260 @@
+/* ===================================
+   ESTILOS HERO SLIDER PROMOCIONES
+   =================================== */
+
+.hero-promociones {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    min-height: 250px;
+    max-height: 400px;
+    overflow: hidden;
+    background: #f0f0f0;
+    display: none; /* Oculto por defecto, se mostrará via JavaScript cuando esté habilitado */
+}
+
+.hero-promociones.hidden {
+    display: none;
+}
+
+/* Contenedor del slider */
+.hero-slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-slider-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Slides individuales */
+.hero-slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e0e0e0;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay oscuro para mejorar legibilidad de botones */
+.hero-slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botones del slider */
+.hero-slide-btn-pedir,
+.hero-slide-btn-whatsapp {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.hero-slide-btn-whatsapp {
+    background: #25D366;
+}
+
+.hero-slide-btn-pedir:hover,
+.hero-slide-btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.hero-slide-btn-pedir:active,
+.hero-slide-btn-whatsapp:active {
+    transform: scale(0.98);
+}
+
+/* Controles de navegación (flechas) */
+.hero-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #333;
+    transition: all 0.3s;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.hero-nav-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.hero-nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.hero-nav-prev {
+    left: 16px;
+}
+
+.hero-nav-next {
+    right: 16px;
+}
+
+/* Indicadores (dots) */
+.hero-indicators {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.hero-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.hero-indicator.active {
+    width: 24px;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Si solo hay botones en algunos slides */
+.hero-slide-overlay:empty {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .hero-promociones {
+        height: 35vh;
+        min-height: 200px;
+    }
+    
+    .hero-nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .hero-nav-prev {
+        left: 8px;
+    }
+    
+    .hero-nav-next {
+        right: 8px;
+    }
+    
+    .hero-slide-btn-pedir,
+    .hero-slide-btn-whatsapp {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    .hero-indicators {
+        bottom: 50px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero-promociones {
+        max-height: 500px;
+    }
+}
+
+/* Animación de fade */
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-slide {
+    animation: heroFadeIn 0.5s ease;
+}
+
+/* MEJORAS CONSERVADORAS PARA MÓVILES - HERO SLIDER */
+@media (max-width: 480px) {
+    .hero-promociones {
+        height: 30vh;
+        min-height: 200px;
+    }
+    
+    .hero-slide-btn-pedir,
+    .hero-slide-btn-whatsapp {
+        padding: 10px 16px;
+        font-size: 13px;
+        min-height: 44px;
+    }
+    
+    .hero-slide-overlay {
+        padding: 16px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-promociones {
+        height: 25vh;
+        min-height: 180px;
+    }
+    
+    .hero-slide-btn-pedir,
+    .hero-slide-btn-whatsapp {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+    
+    .hero-slide-overlay {
+        padding: 12px;
+        gap: 6px;
+    }
+}
+

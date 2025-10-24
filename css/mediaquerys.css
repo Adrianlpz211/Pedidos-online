@@ -1,0 +1,334 @@
+/* ===================================
+   MEDIA QUERIES - RESPONSIVE DESIGN
+   =================================== */
+
+/* MÓVILES MUY PEQUEÑOS (hasta 320px) - Solo mejoras críticas */
+@media (max-width: 320px) {
+    .header-container {
+        padding: 8px 12px;
+    }
+    
+    .logo-text {
+        font-size: 16px;
+    }
+    
+    .logo-subtitle {
+        font-size: 9px;
+    }
+    
+    .products-grid {
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .product-name {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    
+    .product-description {
+        font-size: 11px;
+    }
+    
+    .price-current {
+        font-size: 13px;
+    }
+    
+    .price-old {
+        font-size: 11px;
+    }
+    
+    .main-content {
+        padding: 8px;
+    }
+}
+
+/* MOBILE SMALL (hasta 360px) */
+@media (max-width: 360px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .product-name {
+        font-size: 13px;
+    }
+    
+    .price-current {
+        font-size: 14px;
+    }
+    
+    .logo-text {
+        font-size: 18px;
+    }
+    
+    .header-btn {
+        font-size: 18px;
+        padding: 6px;
+    }
+    
+    /* Mejoras conservadoras para móviles muy pequeños */
+    .btn-pedir, .btn-whatsapp {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .like-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .menu-btn {
+        min-height: 50px;
+        padding: 8px 4px;
+    }
+    
+    .search-input {
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .search-close {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* MOBILE (361px - 480px) */
+@media (min-width: 361px) and (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE LARGE (481px - 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+}
+
+/* TABLET (641px - 768px) */
+@media (min-width: 641px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .header-container {
+        max-width: 100%;
+        padding: 16px 24px;
+    }
+    
+    .main-content {
+        padding: 24px;
+    }
+    
+    .product-card {
+        transition: all 0.3s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .bottom-menu {
+        padding: 12px 0;
+    }
+    
+    .menu-btn i {
+        font-size: 24px;
+    }
+    
+    .menu-btn span {
+        font-size: 12px;
+    }
+}
+
+/* TABLET LARGE (769px - 1024px) */
+@media (min-width: 769px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+    
+    .modal-content {
+        max-width: 600px;
+    }
+    
+    .categories-modal {
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+        max-width: 500px;
+    }
+    
+    .categories-modal.active {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* DESKTOP (1025px - 1280px) */
+@media (min-width: 1025px) {
+    .products-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px;
+    }
+    
+    .header-container,
+    .main-content {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+    
+    .bottom-menu {
+        max-width: 1280px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 16px 16px 0 0;
+    }
+}
+
+/* DESKTOP LARGE (más de 1280px) */
+@media (min-width: 1281px) {
+    .products-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 28px;
+    }
+    
+    .header-container,
+    .main-content {
+        max-width: 1440px;
+    }
+    
+    .bottom-menu {
+        max-width: 1440px;
+    }
+}
+
+/* ORIENTACIÓN LANDSCAPE EN MÓVILES */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        position: relative;
+    }
+    
+    .main-content {
+        margin-top: 0;
+        padding-top: 16px;
+    }
+    
+    .bottom-menu {
+        position: relative;
+    }
+    
+    body {
+        padding-bottom: 0;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+        width: 50%;
+    }
+}
+
+/* HOVER STATES PARA DESKTOP */
+@media (hover: hover) {
+    .header-btn:hover {
+        transform: scale(1.1);
+    }
+    
+    .subcategory-btn:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .quick-view-btn:hover {
+        transform: scale(1.15);
+    }
+    
+    .like-btn:hover {
+        transform: scale(1.1);
+    }
+    
+    .btn-acumular:hover,
+    .btn-pedir:hover,
+    .btn-whatsapp:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+    
+    .menu-btn:hover {
+        color: var(--primary-color);
+        transform: scale(1.05);
+    }
+    
+    .category-item:hover {
+        background: #e8e8e8;
+    }
+    
+    .category-item.active:hover {
+        background: var(--primary-color);
+        opacity: 0.9;
+    }
+}
+
+/* SOPORTE PARA PANTALLAS DE ALTA RESOLUCIÓN */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .product-image,
+    .modal-product-image {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* MODO OSCURO (opcional para futuras implementaciones) */
+@media (prefers-color-scheme: dark) {
+    /* Por ahora comentado, para implementación futura
+    body {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+    
+    .product-card {
+        background: #2a2a2a;
+    }
+    */
+}
+
+/* ACCESIBILIDAD - REDUCCIÓN DE MOVIMIENTO */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* IMPRESIÓN */
+@media print {
+    .header,
+    .bottom-menu,
+    .modal-overlay,
+    .categories-modal,
+    .subcategory-container {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-top: 0;
+        padding-bottom: 0;
+    }
+    
+    .product-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+

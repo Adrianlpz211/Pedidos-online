@@ -1,0 +1,122 @@
+/* ===================================
+   ESTILOS DE ACORDEÓN PARA SUBCATEGORÍAS
+   =================================== */
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    margin-top: 12px;
+}
+
+.accordion-header:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.accordion-header i:first-child {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+    color: #888;
+    font-size: 12px;
+}
+
+.accordion-header:hover .accordion-icon {
+    color: #007bff;
+}
+
+.accordion-content {
+    margin-top: 8px;
+    padding: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-content .subcategorias-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.accordion-content .subcategoria-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease;
+}
+
+.accordion-content .subcategoria-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-content .subcategoria-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.accordion-content .subcategoria-name {
+    font-weight: 500;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+.accordion-content .subcategoria-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.accordion-content .btn-sm {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+}
+
+/* Animación suave para el acordeón */
+.accordion-content {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.accordion-content.show {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .accordion-header {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .accordion-content .subcategoria-item {
+        padding: 8px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .accordion-content .subcategoria-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

@@ -1,0 +1,882 @@
+/* ===================================
+   MÓDULO INVENTARIO - CSS
+   =================================== */
+
+/* Contenedor principal del inventario */
+.inventory-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgb(40, 40, 41);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Indicador de tipo de negocio */
+.business-type-indicator {
+    margin-bottom: 20px;
+}
+
+.business-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.business-type.fisico {
+    background: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.business-type.digital {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.business-type i {
+    font-size: 16px;
+}
+
+/* Pestañas del inventario */
+.inventory-tabs {
+    display: flex;
+    background: rgb(49, 49, 49);
+    border-bottom: 1px solid #e9ecef;
+    overflow-x: auto;
+}
+
+.inventory-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: #7f8c8d;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+.inventory-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.inventory-tab.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom-color: #007bff;
+}
+
+.inventory-tab i {
+    font-size: 16px;
+}
+
+/* Contenido de las pestañas */
+.inventory-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.inventory-tab-content {
+    display: none;
+    padding: 20px;
+    height: 100%;
+}
+
+.inventory-tab-content.active {
+    display: block;
+}
+
+/* ===================================
+   PESTAÑA RESUMEN (OVERVIEW)
+   =================================== */
+
+.inventory-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card.warning {
+    border-left: 4px solid #ffc107;
+}
+
+.stat-card.danger {
+    border-left: 4px solid #dc3545;
+}
+
+.stat-card.success {
+    border-left: 4px solid #28a745;
+}
+
+.stat-card.info {
+    border-left: 4px solid #17a2b8;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.overview-alerts {
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.overview-alerts h4 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.alert-item.warning {
+    border-left: 3px solid #ffc107;
+}
+
+.alert-item.danger {
+    border-left: 3px solid #dc3545;
+}
+
+.alert-item i {
+    font-size: 16px;
+}
+
+/* ===================================
+   PESTAÑA PRODUCTOS
+   =================================== */
+
+.inventory-products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.products-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    background: rgb(48, 48, 48);
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: #7f8c8d;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.products-table {
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventory-table th {
+    background: rgb(49, 49, 49);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.inventory-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #e9ecef;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.inventory-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-name {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.product-category {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.stock-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 40px;
+}
+
+.stock-badge.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.stock-badge.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.stock-badge.danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-badge,
+.availability-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 80px;
+}
+
+.status-badge.available,
+.availability-badge.available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.credit,
+.availability-badge.credit {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.inventory-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ===================================
+   PESTAÑA MOVIMIENTOS
+   =================================== */
+
+.inventory-movements {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movements-controls {
+    display: flex;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 150px;
+}
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-select,
+.filter-input {
+    padding: 8px 12px;
+    background: rgb(40, 40, 41);
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.filter-select::placeholder,
+.filter-input::placeholder {
+    color: #7f8c8d;
+}
+
+.filter-select option {
+    background: rgb(40, 40, 41);
+    color: #ffffff;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.movements-list {
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===================================
+   PESTAÑA UBICACIONES
+   =================================== */
+
+.inventory-locations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.locations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.locations-header h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.location-card {
+    background: rgb(48, 48, 48);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.location-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.location-header h5 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.location-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.location-status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.location-info {
+    margin-bottom: 16px;
+}
+
+.location-info p {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.location-info strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.location-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ===================================
+   FORMULARIOS DE INVENTARIO
+   =================================== */
+
+.adjust-stock-container,
+.new-location-container,
+.edit-location-container,
+.product-history-container {
+    padding: 20px;
+}
+
+.product-info-header {
+    background: rgb(48, 48, 48);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.product-info-header h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.product-category {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+}
+
+.current-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stock-label {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.stock-value {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 8px;
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 4px;
+}
+
+.adjust-stock-form,
+.new-location-form,
+.edit-location-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-control {
+    padding: 10px 12px;
+    background: rgb(40, 40, 41);
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder {
+    color: #7f8c8d;
+}
+
+.form-control option {
+    background: rgb(40, 40, 41);
+    color: #ffffff;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* ===================================
+   HISTORIAL DE MOVIMIENTOS
+   =================================== */
+
+.movements-history h5 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.movement-item {
+    background: rgb(48, 48, 48);
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.movement-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.movement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.movement-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.movement-badge.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.movement-badge.danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.movement-badge.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.movement-date {
+    color: #7f8c8d;
+    font-size: 12px;
+}
+
+.movement-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.movement-quantity,
+.movement-stock,
+.movement-location,
+.movement-notes {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.quantity-label {
+    color: #7f8c8d;
+}
+
+.quantity-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.stock-change {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.movement-location,
+.movement-notes {
+    color: #7f8c8d;
+}
+
+.movement-location i,
+.movement-notes i {
+    font-size: 12px;
+}
+
+/* ===================================
+   UBICACIONES MEJORADAS
+   =================================== */
+
+.location-status.inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.occupancy-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.occupancy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+    transition: width 0.3s ease;
+}
+
+.occupancy-text {
+    color: #7f8c8d;
+    font-size: 12px;
+    margin: 0;
+    text-align: center;
+}
+
+.location-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 768px) {
+    .inventory-tabs {
+        flex-direction: column;
+    }
+    
+    .inventory-tab {
+        justify-content: center;
+        border-bottom: 1px solid #e9ecef;
+        border-right: none;
+    }
+    
+    .inventory-tab.active {
+        border-bottom-color: #007bff;
+        border-right: none;
+    }
+    
+    .overview-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .products-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        min-width: auto;
+    }
+    
+    .movements-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .inventory-table {
+        font-size: 12px;
+    }
+    
+    .inventory-table th,
+    .inventory-table td {
+        padding: 8px 6px;
+    }
+    
+    .inventory-actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inventory-tab-content {
+        padding: 12px;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+    
+    .location-card {
+        padding: 16px;
+    }
+    
+    .inventory-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* ===================================
+   MODO OSCURO
+   =================================== */
+[data-theme="dark"] .stat-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}

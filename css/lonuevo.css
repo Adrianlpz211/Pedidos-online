@@ -1,0 +1,155 @@
+/* ===================================
+   ESTILOS MÓDULO LONUEVO (Deseos)
+   =================================== */
+
+.lonuevo-container {
+    padding: 20px;
+}
+
+.lonuevo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.lonuevo-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lonuevo-title i {
+    color: #e74c3c;
+}
+
+.lonuevo-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-lonuevo {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-lonuevo-primary {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-lonuevo-primary:hover {
+    background: #c0392b;
+}
+
+.btn-lonuevo-secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #dee2e6;
+}
+
+.btn-lonuevo-secondary:hover {
+    background: #e9ecef;
+}
+
+.lonuevo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.lonuevo-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.lonuevo-card:hover {
+    transform: translateY(-5px);
+}
+
+.lonuevo-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.lonuevo-content {
+    padding: 20px;
+}
+
+.lonuevo-product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.lonuevo-product-description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.lonuevo-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.lonuevo-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.lonuevo-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.lonuevo-empty i {
+    font-size: 48px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.lonuevo-empty h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.lonuevo-empty p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lonuevo-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .lonuevo-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .lonuevo-actions {
+        justify-content: center;
+    }
+}

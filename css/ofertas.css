@@ -1,0 +1,121 @@
+/* ===================================
+   ESTILOS MÓDULO OFERTAS
+   =================================== */
+
+.ofertas-container {
+    padding: 20px;
+}
+
+.ofertas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.oferta-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.oferta-card:hover {
+    transform: translateY(-5px);
+}
+
+.oferta-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.oferta-content {
+    padding: 20px;
+}
+
+.oferta-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.oferta-description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.oferta-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.oferta-original-price {
+    font-size: 16px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+
+.oferta-discount {
+    background: #e74c3c;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.oferta-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-oferta {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-oferta-primary {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-oferta-primary:hover {
+    background: #c0392b;
+}
+
+.btn-oferta-secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #dee2e6;
+}
+
+.btn-oferta-secondary:hover {
+    background: #e9ecef;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ofertas-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .oferta-actions {
+        flex-direction: column;
+    }
+}

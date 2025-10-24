@@ -1,0 +1,126 @@
+/* ===================================
+   ESTILOS MÓDULO DESEOS (WISHLIST)
+   =================================== */
+
+.deseo-section {
+    padding: 16px;
+    padding-bottom: 90px;
+}
+
+.deseo-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 0;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+    position: sticky;
+    top: 60px;
+    z-index: 100;
+}
+
+.deseo-back-btn:hover {
+    color: var(--primary-color);
+}
+
+.deseo-back-btn:active {
+    transform: scale(0.98);
+}
+
+.deseo-back-btn i {
+    font-size: 16px;
+}
+
+.deseo-header {
+    margin-bottom: 20px;
+}
+
+.deseo-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.deseo-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.deseo-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.deseo-empty-icon {
+    font-size: 80px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.deseo-empty-text {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.deseo-empty-subtext {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 24px;
+}
+
+.btn-explorar {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-explorar:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-explorar:active {
+    transform: scale(0.98);
+}
+
+/* Grid de productos en deseos */
+.deseo-products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* Animación al eliminar de deseos */
+@keyframes fadeOutProduct {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.product-card.removing {
+    animation: fadeOutProduct 0.3s forwards;
+}
+

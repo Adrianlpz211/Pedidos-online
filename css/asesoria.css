@@ -1,0 +1,173 @@
+/* ===================================
+   ESTILOS MÓDULO ASESORÍA
+   =================================== */
+
+.asesoria-container {
+    padding: 20px;
+}
+
+.asesoria-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.asesoria-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.asesoria-subtitle {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.asesoria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.asesoria-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.asesoria-card:hover {
+    transform: translateY(-5px);
+}
+
+.asesoria-icon {
+    width: 80px;
+    height: 80px;
+    background: #e74c3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.asesoria-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.asesoria-card-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.asesoria-card-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+.asesoria-card-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.asesoria-card-features li {
+    padding: 8px 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.asesoria-card-features li i {
+    color: #28a745;
+    font-size: 14px;
+}
+
+.btn-asesoria {
+    width: 100%;
+    padding: 12px 24px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-asesoria:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.asesoria-contact {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.asesoria-contact-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.asesoria-contact-description {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.asesoria-contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.contact-item i {
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .asesoria-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .asesoria-contact-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+}

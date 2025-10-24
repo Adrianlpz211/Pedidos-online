@@ -1,0 +1,70 @@
+# ===================================
+# GITIGNORE - SISTEMA DE PEDIDOS HÍBRIDO
+# ===================================
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Archivos de backup
+*.bak
+*.backup
+*~
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de Node.js (si se agrega en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de PHP (si se agrega backend)
+vendor/
+composer.lock
+
+# Archivos de base de datos
+*.sql
+*.db
+*.sqlite
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de testing
+coverage/
+.nyc_output/
+
+# Archivos de build (si se agrega en el futuro)
+dist/
+build/
+
+# Archivos de configuración específicos del servidor
+.htaccess.local
+config.local.php
+
+# Archivos de cache del navegador
+.cache/
+
+# Archivos de XAMPP específicos
+xampp-control.ini
